@@ -29,4 +29,24 @@ document.addEventListener('DOMContentLoaded', function() {
     addButtonListener('delButton', 'del', 'delInput');
     addButtonListener('renameButton', 'rename', 'renameInput');
     addButtonListener('timeButton', 'get_time');
+	
+	tg.onEvent('webapp_data_sent', function(event) {
+        let data = JSON.parse(event.data);
+        if (data.directories && data.files) {
+            let contentDiv = document.getElementById('directoryContents');
+            contentDiv.innerHTML = '<h2>Содержимое директории:</h2>';
+            
+            data.directories.forEach(function(dir) {
+                contentDiv.innerHTML += `<p class="directory">📁 ${dir}</p>`;
+            });
+            
+            data.files.forEach(function(file) {
+                contentDiv.innerHTML += `<p class="file">📄 ${file}</p>`;
+            });
+            
+            if (data.directories.length === 0 && data.files.length === 0) {
+                contentDiv.innerHTML += '<p>Директория пуста.</p>';
+            }
+        }
+    });
 });
