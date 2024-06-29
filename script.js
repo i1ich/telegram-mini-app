@@ -4,6 +4,6 @@ tg.expand();
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('timeButton').addEventListener('click', function() {
-        tg.sendData('get_time');
+        tg.sendData('get_time111');
     });
 });
