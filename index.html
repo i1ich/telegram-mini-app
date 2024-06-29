@@ -9,25 +9,74 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
         }
         button {
-            margin: 5px;
+            margin: 5px 0;
             padding: 10px;
             font-size: 16px;
+        }
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: calc(100% - 22px);
         }
     </style>
 </head>
 <body>
     <h1>Файловый менеджер</h1>
-    <button id="startButton">Старт</button>
-    <button id="mdButton">Создать директорию</button>
-    <button id="cdButton">Изменить директорию</button>
-    <button id="lsButton">Список файлов</button>
-    <button id="touchButton">Создать файл</button>
-    <button id="getButton">Получить файл</button>
-    <button id="delButton">Удалить</button>
-    <button id="renameButton">Переименовать</button>
-    <button id="timeButton">Показать время</button>
+    
+    <div class="button-group">
+        <button id="startButton">Старт</button>
+    </div>
+
+    <div class="button-group">
+        <input type="text" id="mdInput" placeholder="Имя новой директории">
+        <button id="mdButton">Создать директорию</button>
+    </div>
+
+    <div class="button-group">
+        <input type="text" id="cdInput" placeholder="Путь к директории">
+        <button id="cdButton">Изменить директорию</button>
+    </div>
+
+    <div class="button-group">
+        <button id="lsButton">Список файлов</button>
+    </div>
+
+    <div class="button-group">
+        <button id="touchButton">Создать файл</button>
+    </div>
+
+    <div class="button-group">
+        <input type="text" id="getInput" placeholder="Имя файла">
+        <button id="getButton">Получить файл</button>
+    </div>
+
+    <div class="button-group">
+        <input type="text" id="delInput" placeholder="Имя файла/директории">
+        <button id="delButton">Удалить</button>
+    </div>
+
+    <div class="button-group">
+        <input type="text" id="renameInput" placeholder="Старое имя,Новое имя">
+        <button id="renameButton">Переименовать</button>
+    </div>
+
+    <div class="button-group">
+        <button id="timeButton">Показать время</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
