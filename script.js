@@ -70,19 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Получаем начальные данные из URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialData = urlParams.get('initial_data');
-    if (initialData) {
-        try {
-            const data = JSON.parse(decodeURIComponent(initialData));
-            if (data.command === 'initial_ls') {
-                updateDirectoryContents(data);
-            }
-        } catch (e) {
-            console.error('Ошибка при обработке начальных данных:', e);
-        }
-    }
+    // Запрашиваем начальное состояние директории при загрузке страницы
+    tg.sendData(JSON.stringify(['init']));
 
     // Обработчик для получения сообщений от бота
     tg.onEvent('message', function(event) {
