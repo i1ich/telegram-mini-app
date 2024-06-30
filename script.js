@@ -52,4 +52,47 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Ошибка при обработке данных:', e);
         }
     });
+	
+	function updateDirectoryContents(data) {
+        let contentDiv = document.getElementById('directoryContents');
+        contentDiv.innerHTML = '<h2>Содержимое директории:</h2>';
+        
+        data.directories.forEach(function(dir) {
+            contentDiv.innerHTML += `<p class="directory">📁 ${dir}</p>`;
+        });
+        
+        data.files.forEach(function(file) {
+            contentDiv.innerHTML += `<p class="file">📄 ${file}</p>`;
+        });
+        
+        if (data.directories.length === 0 && data.files.length === 0) {
+            contentDiv.innerHTML += '<p>Директория пуста.</p>';
+        }
+    }
+
+    // Получаем начальные данные из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialData = urlParams.get('initial_data');
+    if (initialData) {
+        try {
+            const data = JSON.parse(decodeURIComponent(initialData));
+            if (data.command === 'initial_ls') {
+                updateDirectoryContents(data);
+            }
+        } catch (e) {
+            console.error('Ошибка при обработке начальных данных:', e);
+        }
+    }
+
+    // Обработчик для получения сообщений от бота
+    tg.onEvent('message', function(event) {
+        try {
+            let data = JSON.parse(event.text);
+            if (data.command === 'ls_result') {
+                updateDirectoryContents(data);
+            }
+        } catch (e) {
+            console.error('Ошибка при обработке сообщения:', e);
+        }
+    });
 });
